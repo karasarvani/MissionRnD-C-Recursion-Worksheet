@@ -34,7 +34,62 @@ more parameters .
 */
 
 #include<stdlib.h>
+#include<stdlib.h>
+int maze_directions(int x1, int y1, int x2, int y2, int t, int rows, int columns,int *maze, int *result)
+{
+	if (*result == 1)
+	{
+		return *result;
+	}
+	else
+	{
+		if (maze[(x1*columns) + y1] == 1 && x1 <= rows - 1 && y1 <=
+			columns - 1 && x1 >= 0 && y1 >= 0 && t == 0 && (x1 != x2 || y1 != y2))
+		{
+			maze_directions(x1, y1 - 1, x2, y2, 0, rows, columns, maze, result);
+			maze_directions(x1 + 1, y1, x2, y2, 2, rows, columns, maze, result);
+			maze_directions(x1 - 1, y1, x2, y2, 3, rows, columns, maze, result);
+		}
+		else if (maze[(x1*columns) + y1] == 1 && x1 <= rows - 1 && y1 <=
+			columns - 1 && x1 >= 0 && y1 >= 0 && t == 1 && (x1 != x2 || y1 != y2))
+		{
+			maze_directions(x1, y1 + 1, x2, y2, 1, rows, columns, maze, result);
+			maze_directions(x1 + 1, y1, x2, y2, 2, rows, columns, maze, result);
+			maze_directions(x1 - 1, y1, x2, y2, 3, rows, columns, maze, result);
+		}
+		else if (maze[(x1*columns) + y1] == 1 && x1 <= rows - 1 && y1 <=
+			columns - 1 && x1 >= 0 && y1 >= 0 && t == 2 && (x1 != x2 || y1 != y2))
+		{
+			maze_directions(x1 + 1, y1, x2, y2, 2, rows, columns, maze, result);
+			maze_directions(x1, y1 + 1, x2, y2, 1, rows, columns, maze, result);
+			maze_directions(x1, y1 - 1, x2, y2, 0, rows, columns, maze, result);
+		}
+		else if (maze[(x1*columns) + y1] == 1 && x1 <= rows - 1 && y1 <=
+			columns - 1 && x1 >= 0 && y1 >= 0 && t == 3 && (x1 != x2 || y1 != y2))
+		{
+			maze_directions(x1, y1 + 1, x2, y2, 1, rows, columns, maze, result);
+			maze_directions(x1, y1 - 1, x2, y2, 0, rows, columns, maze, result);
+			maze_directions(x1 + 1, y1, x2, y2, 3, rows, columns, maze, result);
+		}
+		if (x1 == x2&&y1 == y2)
+		{
+			(*result)++;
+		}
+
+		return *result;
+	}
+}
 int path_exists(int *maze, int rows, int columns, int x1, int y1, int x2, int y2)
 {
+	int t = 1;
+	int result = 0;
+	if (x1 >= 0 && y1 >= 0 && x2 >= 0 && y2 >= 0)
+	{
+		if (maze[(x1*columns) + y1] == 1 && maze[(x2*columns) + y2] == 1)
+		{
+			return maze_directions(x1, y1, x2, y2, t, rows, columns, maze, &result);
+		}
+
+	}
 	return 0;
 }
