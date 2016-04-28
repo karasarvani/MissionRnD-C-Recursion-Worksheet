@@ -43,4 +43,5 @@ int get_steps(int s)
 
 	int either = 0, result = 0;
 	return count_steps(s, either, &result);
+
 }
