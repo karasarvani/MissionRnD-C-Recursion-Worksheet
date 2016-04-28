@@ -40,6 +40,7 @@ int count_steps(int steps, int either, int *result)
 }
 int get_steps(int s)
 {
+
 	int either = 0, result = 0;
 	return count_steps(s, either, &result);
 }
