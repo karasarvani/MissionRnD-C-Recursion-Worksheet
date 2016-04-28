@@ -24,7 +24,22 @@
 #include "stdafx.h"
 
 
+int count_steps(int steps, int either, int *result)
+{
+
+	if (either == steps&&steps != 0)
+	{
+		(*result)++;
+	}
+	if (either <steps)
+	{
+		count_steps(steps, either + 1, result);
+		count_steps(steps, either + 2, result);
+	}
+	return *result;
+}
 int get_steps(int s)
 {
-	return 0;
+	int either = 0, result = 0;
+	return count_steps(s, either, &result);
 }
